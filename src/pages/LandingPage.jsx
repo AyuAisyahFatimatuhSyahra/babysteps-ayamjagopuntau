@@ -212,7 +212,7 @@ export default function LandingPage({onNavigate, onLogin}) {
             <div className="bg-[#FFF9F2] p-8 rounded-3xl text-center border border-orange-100">
               <div className="text-6xl mb-2">👶</div>
               <span className="inline-block bg-[#BADAFF] text-slate-900 font-bold text-xs px-4 py-1.5 rounded-full">AI Pola Bayi</span>
-            </div>][[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+            </div>
           </div>
         </div>
       </section>

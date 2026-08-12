@@ -1,173 +1,232 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../assets/babysteps.png";
+import { Menu, X } from "lucide-react";
 
-export default function Navbar({onNavigate,onLogin}){
+export default function Navbar({ onNavigate, onLogin }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-return(
-<header className="
-bg-white/90
-backdrop-blur-md
-border-b
-border-slate-100
-sticky
-top-0
-z-50
-">
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
 
-<div className="
-max-w-7xl
-mx-auto
-px-6
-py-4
-flex
-justify-between
-items-center
-">
+  // Fungsi navigasi + tutup menu otomatis
+  const handleNavigate = (page) => {
+    onNavigate(page);
+    closeMenu();
+  };
 
+  return (
+    <header className="
+      bg-white/90
+      backdrop-blur-md
+      border-b
+      border-slate-100
+      sticky
+      top-0
+      z-50
+    ">
+      <div className="
+        max-w-7xl
+        mx-auto
+        px-6
+        py-4
+        flex
+        justify-between
+        items-center
+      ">
+        {/* LOGO */}
+        <button
+          onClick={() => handleNavigate("landing")}
+          className="cursor-pointer"
+        >
+          <img
+            src={logo}
+            alt="Logo BabySteps"
+            className="h-12 w-auto object-contain"
+          />
+        </button>
 
-{/* LOGO */}
+        {/* NAVIGASI DESKTOP */}
+        <nav className="
+          hidden
+          md:flex
+          items-center
+          gap-8
+          text-sm
+          font-semibold
+          text-slate-600
+        ">
+          <button
+            onClick={() => handleNavigate("landing")}
+            className="hover:text-[#609EF5] transition"
+          >
+            Beranda
+          </button>
 
-<button
-onClick={()=>onNavigate("landing")}
-className="cursor-pointer"
->
+          <a
+            href="#challenges"
+            className="hover:text-[#609EF5] transition"
+          >
+            Tantangan Kami
+          </a>
 
-<img
-src={logo}
-alt="BabySteps Logo"
-className="
-h-12
-w-auto
-object-contain
-"
-/>
+          <a
+            href="#features"
+            className="hover:text-[#609EF5] transition"
+          >
+            Fitur
+          </a>
 
-</button>
+          <a
+            href="#pricing"
+            className="hover:text-[#609EF5] transition"
+          >
+            Harga
+          </a>
 
+          <button
+            onClick={() => handleNavigate("articles")}
+            className="hover:text-[#609EF5] transition"
+          >
+            Artikel
+          </button>
 
+          <button
+            onClick={() => handleNavigate("help")}
+            className="hover:text-[#609EF5] transition"
+          >
+            Bantuan
+          </button>
 
-{/* NAVIGATION */}
+          <button
+            onClick={() => handleNavigate("age-guides")}
+            className="hover:text-[#609EF5] transition"
+          >
+            Panduan Usia
+          </button>
+        </nav>
 
-<nav className="
-hidden
-md:flex
-items-center
-gap-8
-text-sm
-font-semibold
-text-slate-600
-">
+        {/* CTA BUTTON + HAMBURGER */}
+        <div className="flex items-center gap-4">
+          <button
+            onClick={onLogin}
+            className="
+              hidden sm:inline-block
+              bg-[#609EF5]
+              hover:bg-blue-600
+              text-white
+              font-bold
+              px-6
+              py-2.5
+              rounded-full
+              shadow-md
+              shadow-blue-200
+              transition
+              hover:scale-105
+            "
+          >
+            Coba Gratis
+          </button>
 
+          {/* Tombol Hamburger (muncul di layar < md) */}
+          <button
+            onClick={toggleMenu}
+            className="md:hidden text-slate-600 hover:text-[#609EF5] transition"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </div>
 
-<button
-onClick={()=>onNavigate("landing")}
-className="
-hover:text-[#609EF5]
-transition
-"
->
-Home
-</button>
+      {/* MENU MOBILE (dropdown) */}
+      {isMenuOpen && (
+        <div className="
+          md:hidden
+          bg-white
+          border-t
+          border-slate-100
+          py-4
+          px-6
+          flex
+          flex-col
+          gap-4
+          text-sm
+          font-semibold
+          text-slate-600
+        ">
+          <button
+            onClick={() => handleNavigate("landing")}
+            className="text-left hover:text-[#609EF5] transition"
+          >
+            Beranda
+          </button>
 
+          <a
+            href="#challenges"
+            onClick={closeMenu}
+            className="hover:text-[#609EF5] transition"
+          >
+            Tantangan Kami
+          </a>
 
+          <a
+            href="#features"
+            onClick={closeMenu}
+            className="hover:text-[#609EF5] transition"
+          >
+            Fitur
+          </a>
 
-<a
-href="#challenges"
-className="
-hover:text-[#609EF5]
-transition
-"
->
-Our Challenges
-</a>
+          <a
+            href="#pricing"
+            onClick={closeMenu}
+            className="hover:text-[#609EF5] transition"
+          >
+            Harga
+          </a>
 
+          <button
+            onClick={() => handleNavigate("articles")}
+            className="text-left hover:text-[#609EF5] transition"
+          >
+            Artikel
+          </button>
 
+          <button
+            onClick={() => handleNavigate("help")}
+            className="text-left hover:text-[#609EF5] transition"
+          >
+            Bantuan
+          </button>
 
-<a
-href="#features"
-className="
-hover:text-[#609EF5]
-transition
-"
->Features
-</a>
+          <button
+            onClick={() => handleNavigate("age-guides")}
+            className="text-left hover:text-[#609EF5] transition"
+          >
+            Panduan Usia
+          </button>
 
-<a
-href="#pricing"
-className="
-hover:text-[#609EF5]
-transition
-"
->
-Pricing
-</a>
-
-<button
-onClick={()=>onNavigate("articles")}
-className="
-hover:text-[#609EF5]
-transition
-"
->
-Articles
-</button>
-
-
-
-<button
-onClick={()=>onNavigate("help")}
-className="
-hover:text-[#609EF5]
-transition
-"
->
-Help
-</button>
-
-
-
-<button
-onClick={()=>onNavigate("age-guides")}
-className="
-hover:text-[#609EF5]
-transition
-"
->
-Age Guides
-</button>
-
-
-</nav>
-
-
-
-{/* CTA BUTTON */}
-
-<button
-onClick={onLogin}
-className="
-bg-[#609EF5]
-hover:bg-blue-600
-text-white
-font-bold
-px-6
-py-2.5
-rounded-full
-shadow-md
-shadow-blue-200
-transition
-hover:scale-105
-"
->
-
-Try Free
-
-</button>
-
-
-</div>
-
-</header>
-)
-
+          {/* Tombol CTA di mobile */}
+          <button
+            onClick={onLogin}
+            className="
+              bg-[#609EF5]
+              hover:bg-blue-600
+              text-white
+              font-bold
+              px-6
+              py-2.5
+              rounded-full
+              shadow-md
+              shadow-blue-200
+              transition
+              text-center
+              mt-2
+            "
+          >
+            Coba Gratis
+          </button>
+        </div>
+      )}
+    </header>
+  );
 }

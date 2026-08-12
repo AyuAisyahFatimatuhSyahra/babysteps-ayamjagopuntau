@@ -9,6 +9,8 @@ import HelpCenter from "./pages/HelpCenter";
 import AgeGuides from "./pages/AgeGuides";
 import SmartTracking from "./pages/SmartTracking";
 import HealthSupport from "./pages/HealthSupport"; // <-- Tambahan import HealthSupport
+import AIBaby from "./pages/AIBaby";
+import Profile from "./pages/Profile";
 
 
 export default function App(){
@@ -88,6 +90,28 @@ export default function App(){
         />
       )}
 
+
+      {/* AI BABY */}
+      {currentPage === "ai" && (
+        <AIBaby
+          onNavigate={navigate}
+          onLogout={() => {
+            setCurrentPage("landing");
+            window.scrollTo(0, 0);
+          }}
+        />
+      )}
+
+      {/* Profile */}
+      {currentPage === "profile" && (
+        <Profile
+          onNavigate={navigate}
+          onLogout={() => {
+            setCurrentPage("landing");
+            window.scrollTo(0, 0);
+          }}
+        />
+      )}
 
 
       {/* HEALTH SUPPORT / DOKTER */}
