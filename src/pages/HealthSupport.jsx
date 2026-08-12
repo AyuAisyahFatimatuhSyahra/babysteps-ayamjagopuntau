@@ -7,24 +7,17 @@ import {
   PhoneCall,
   FileText,
   ShieldCheck,
-  Sparkles,
   ChevronDown,
   ChevronUp,
   CheckCircle2,
   Lock,
   Download,
   Send,
-  Clock,
-  UserCheck,
   Stethoscope,
   Zap,
-  AlertCircle,
-  ArrowRight,
   Bot,
   Activity,
-  Calendar,
-  Check,
-  MessageSquare
+  Check
 } from "lucide-react";
 
 export default function HealthSupport({ onNavigate, onLogout }) {
@@ -55,16 +48,15 @@ export default function HealthSupport({ onNavigate, onLogout }) {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-['Poppins',sans-serif] text-slate-800 pb-12">
-      {/* NAVBAR */}
       <DashboardNavbar onNavigate={onNavigate} onLogout={onLogout} />
 
-      {/* DEMO MODE TOGGLE BAR (Memudahkan Test Tampilan Free vs Care+) */}
+      {/* DEMO MODE TOGGLE BAR */}
       <div className="bg-slate-900 text-white py-2.5 px-4 text-center text-xs sm:text-sm font-medium flex items-center justify-center gap-3 shadow-inner">
         <span className="text-slate-300">Mode Tampilan:</span>
         <div className="inline-flex bg-slate-800 p-1 rounded-full border border-slate-700">
           <button
             onClick={() => setIsCarePlus(false)}
-            className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
+            className={`px-3.5 py-1 rounded-full text-xs font-bold transition-all ${
               !isCarePlus ? "bg-[#609EF5] text-white shadow" : "text-slate-400 hover:text-white"
             }`}
           >
@@ -72,7 +64,7 @@ export default function HealthSupport({ onNavigate, onLogout }) {
           </button>
           <button
             onClick={() => setIsCarePlus(true)}
-            className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
+            className={`px-3.5 py-1 rounded-full text-xs font-bold transition-all ${
               isCarePlus ? "bg-[#FDE047] text-slate-900 shadow" : "text-slate-400 hover:text-white"
             }`}
           >
@@ -83,9 +75,7 @@ export default function HealthSupport({ onNavigate, onLogout }) {
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 space-y-6 sm:space-y-8">
         
-        {/* ==========================================
-            BREADCRUMB & HEADER BADGE
-        ========================================== */}
+        {/* BREADCRUMB & HEADER BADGE */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2 text-xs text-slate-400">
             <button onClick={() => onNavigate("dashboard")} className="hover:text-[#609EF5]">Home</button>
@@ -106,42 +96,40 @@ export default function HealthSupport({ onNavigate, onLogout }) {
           </div>
         </div>
 
-
-        {/* ==========================================
-            HERO BANNER (Adaptive: Free vs Care+)
-        ========================================== */}
+        {/* HERO BANNER (Adaptive: Free vs Care+) */}
         {!isCarePlus ? (
-          // HERO STANDARD (FREE)
-          <section className="bg-gradient-to-br from-[#FAF5FF] via-[#F4F0FF] to-[#EDF4FF] rounded-[28px] sm:rounded-[36px] p-6 sm:p-10 border border-purple-100 shadow-xs relative overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center relative z-10">
+          // HERO STANDARD (FREE) — cute.png mentok ke kanan
+          <section className="bg-gradient-to-br from-[#FAF5FF] via-[#F4F0FF] to-[#EDF4FF] rounded-[28px] sm:rounded-[36px] p-6 sm:p-10 border border-purple-100 shadow-xs relative overflow-visible">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-25.5 items-center relative z-15">
               <div className="md:col-span-7 space-y-3 sm:space-y-4">
                 <div className="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-md text-purple-700 px-3 py-1 rounded-full text-[11px] font-bold border border-purple-100">
                   <StarIcon className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                   <span>BabySteps Care+ • Perlindungan tambahan untuk Arka</span>
                 </div>
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 leading-tight">
-                  Tenang, Mama.<br />Kami siap membantu Arka.
+                 Tenang, Mama.<br />Kami siap membantu Arka dan memberikan informasi yang Mama butuhkan.
                 </h1>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-lg">
                   Ketika Mama merasa khawatir, BabySteps membantu menemukan langkah berikutnya dengan tenang.
                 </p>
               </div>
-              <div className="md:col-span-5 flex justify-center md:justify-end">
-                <div className="relative w-48 sm:w-56 lg:w-64">
-                  <img
-                    src="https://img.freepik.com/free-vector/pediatrician-concept-illustration_114360-7888.jpg"
-                    alt="Dokter dan Bayi"
-                    className="w-full h-auto object-contain rounded-2xl mix-blend-multiply"
-                  />
-                </div>
+              <div className="md:col-span-5 flex justify-center md:justify-end items-center relative">
+                {/* PERUBAHAN: tambahkan -mr-6 sm:-mr-10 untuk menembus padding section */}
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 -mr-10 sm:-mr-16 lg:-mr-[4.5rem] w-92 sm:w-100 lg:w-116 transition-all duration-300 transform hover:scale-105">
+                <img
+                  src="/src/assets/cute.png"
+                  alt="Dokter dan Bayi"
+                  className="w-full h-auto object-contain rounded-2xl mix-blend-multiply drop-shadow-md"
+                />
+              </div>
               </div>
             </div>
           </section>
         ) : (
           // HERO CARE+ ACTIVE (PREMIUM)
-          <section className="bg-[#FEF9C3] rounded-[28px] sm:rounded-[36px] p-6 sm:p-10 border border-yellow-200 shadow-xs relative overflow-hidden">
+          <section className="bg-[#FEF9C3] rounded-[28px] sm:rounded-[36px] px-6 sm:px-10 pt-6 sm:pt-10 pb-0 border border-yellow-200 shadow-xs relative overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center relative z-10">
-              <div className="md:col-span-7 space-y-3 sm:space-y-4">
+              <div className="md:col-span-7 pb-6 sm:pb-10 space-y-3 sm:space-y-4">
                 <div className="inline-flex items-center gap-1.5 bg-yellow-300 text-slate-900 px-3.5 py-1 rounded-full text-[11px] font-black">
                   ★ BabySteps Care+ Aktif • Bantuan Medis Prioritas
                 </div>
@@ -160,25 +148,21 @@ export default function HealthSupport({ onNavigate, onLogout }) {
                   </button>
                 </div>
               </div>
-              <div className="md:col-span-5 flex justify-center md:justify-end">
+              <div className="absolute right-1 top-[35%] -translate-y-[30%] w-97 sm:w-105 lg:w-121 transition-all duration-300 hover:scale-105">
                 <img
-                  src="https://img.freepik.com/free-vector/pediatrician-concept-illustration_114360-7888.jpg"
+                  src="/src/assets/cooldoctor.png"
                   alt="Care+ Doctor"
-                  className="w-48 sm:w-56 lg:w-64 h-auto object-contain mix-blend-multiply"
+                  className="w-112 sm:w-130 lg:w-136 h-auto object-contain mix-blend-multiply drop-shadow-md"
                 />
               </div>
             </div>
           </section>
         )}
 
-
-        {/* ==========================================
-            STATUS KESEHATAN / WELLNESS SUMMARY
-        ========================================== */}
+        {/* STATUS KESEHATAN / WELLNESS SUMMARY */}
         {!isCarePlus ? (
           // Free Mode: 2 Column Box
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            {/* Box Left */}
             <div className="bg-[#EFF6FF] rounded-[24px] p-5 sm:p-6 border border-blue-100 flex flex-col justify-between space-y-4">
               <div>
                 <div className="flex items-center gap-2 text-blue-900 font-bold text-sm">
@@ -205,7 +189,6 @@ export default function HealthSupport({ onNavigate, onLogout }) {
               </button>
             </div>
 
-            {/* Box Right */}
             <div className="bg-[#FEF9C3] rounded-[24px] p-5 sm:p-6 border border-yellow-200 flex flex-col justify-between space-y-4">
               <div>
                 <div className="flex items-center gap-2 text-amber-900 font-bold text-sm">
@@ -272,10 +255,7 @@ export default function HealthSupport({ onNavigate, onLogout }) {
           </div>
         )}
 
-
-        {/* ==========================================
-            HUBUNGKAN ARKA DENGAN DOKTER (Step Workflow)
-        ========================================== */}
+        {/* HUBUNGKAN ARKA DENGAN DOKTER */}
         <section className="bg-gradient-to-br from-[#FFF5F5] via-[#FFF9E6] to-[#F3E8FF] rounded-[28px] p-5 sm:p-8 border border-rose-100 shadow-xs">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
@@ -295,12 +275,11 @@ export default function HealthSupport({ onNavigate, onLogout }) {
             </div>
           </div>
 
-          {/* Workflow Steps Horizontal/Responsive */}
           <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 relative">
-            <WorkflowStep icon={<Activity className="w-4 h-4 text-blue-600" />} label="BabySteps Monitoring" bg="bg-blue-100" active />
-            <WorkflowStep icon={<Zap className="w-4 h-4 text-amber-600" />} label="Health Check-up" bg="bg-amber-100" active />
-            <WorkflowStep icon={<FileText className="w-4 h-4 text-purple-600" />} label="Medical Resume" bg="bg-purple-100" active />
-            <WorkflowStep icon={<Stethoscope className="w-4 h-4 text-rose-600" />} label="Dokter Konsultasi" bg="bg-rose-100" active />
+            <WorkflowStep icon={<Activity className="w-4 h-4 text-blue-600" />} label="BabySteps Monitoring" bg="bg-blue-100" />
+            <WorkflowStep icon={<Zap className="w-4 h-4 text-amber-600" />} label="Health Check-up" bg="bg-amber-100" />
+            <WorkflowStep icon={<FileText className="w-4 h-4 text-purple-600" />} label="Medical Resume" bg="bg-purple-100" />
+            <WorkflowStep icon={<Stethoscope className="w-4 h-4 text-rose-600" />} label="Dokter Konsultasi" bg="bg-rose-100" />
           </div>
 
           <div className="mt-6 pt-5 border-t border-slate-200/60 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700 font-semibold">
@@ -311,14 +290,10 @@ export default function HealthSupport({ onNavigate, onLogout }) {
           </div>
         </section>
 
-
-        {/* ==========================================
-            RINGKASAN MEDIS OTOMATIS (MEDICAL RESUME)
-        ========================================== */}
+        {/* RINGKASAN MEDIS OTOMATIS (MEDICAL RESUME) */}
         <section className={`rounded-[28px] p-5 sm:p-8 transition-all shadow-xs ${isCarePlus ? "bg-[#DBEAFE] border border-blue-200" : "bg-white border border-slate-200"}`}>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
             
-            {/* Card Preview Graphic Left */}
             <div className="md:col-span-5 flex justify-center">
               <div className="bg-white rounded-2xl p-4 shadow-md border border-slate-100 w-full max-w-xs relative overflow-hidden">
                 <div className="bg-[#609EF5] -mx-4 -mt-4 p-3 text-white text-center rounded-t-2xl font-bold text-xs flex items-center justify-between px-4">
@@ -333,7 +308,6 @@ export default function HealthSupport({ onNavigate, onLogout }) {
                   </div>
 
                   {!isCarePlus ? (
-                    // Locked Overlay Blur
                     <div className="relative py-6 flex flex-col items-center justify-center text-center space-y-2">
                       <div className="w-10 h-10 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center">
                         <Lock className="w-5 h-5" />
@@ -342,7 +316,6 @@ export default function HealthSupport({ onNavigate, onLogout }) {
                       <p className="text-[10px] text-slate-400">Upgrade ke Care+ untuk membuka riwayat medis lengkap</p>
                     </div>
                   ) : (
-                    // Unlocked Real Data
                     <div className="space-y-2 py-1 text-[11px]">
                       <div className="flex justify-between bg-slate-50 p-2 rounded">
                         <span>Feeding avg:</span> <span className="font-bold text-slate-800">537 ml / hari</span>
@@ -362,7 +335,6 @@ export default function HealthSupport({ onNavigate, onLogout }) {
               </div>
             </div>
 
-            {/* Resume Description Right */}
             <div className="md:col-span-7 space-y-4">
               <div className="flex items-center gap-2">
                 <h3 className="text-xl font-black text-slate-900">Ringkasan Medis Otomatis</h3>
@@ -414,10 +386,7 @@ export default function HealthSupport({ onNavigate, onLogout }) {
           </div>
         </section>
 
-
-        {/* ==========================================
-            BENEFIT GRID (4 CARDS)
-        ========================================== */}
+        {/* BENEFIT GRID (4 CARDS) */}
         <section className="space-y-3">
           <div className="flex items-center justify-between">
             <h2 className="text-base sm:text-lg font-black text-slate-900">Apa yang Mama dapatkan dengan BabySteps Care+?</h2>
@@ -452,13 +421,9 @@ export default function HealthSupport({ onNavigate, onLogout }) {
           </div>
         </section>
 
-
-        {/* ==========================================
-            ACCORDION GUIDANCE & HISTORY (2 COLUMNS)
-        ========================================== */}
+        {/* ACCORDION GUIDANCE & HISTORY */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           
-          {/* LEFT: Accordion Kapan Mama perlu bantuan? */}
           <div className="lg:col-span-7 bg-white rounded-[28px] p-5 sm:p-7 border border-slate-200 shadow-xs space-y-4">
             <div>
               <h2 className="text-base sm:text-lg font-black text-slate-900">Kapan Mama perlu bantuan?</h2>
@@ -513,7 +478,6 @@ export default function HealthSupport({ onNavigate, onLogout }) {
             </div>
           </div>
 
-          {/* RIGHT: Riwayat Bantuan / Activity Timeline */}
           <div className="lg:col-span-5 bg-white rounded-[28px] p-5 sm:p-7 border border-slate-200 shadow-xs space-y-4">
             <div>
               <h2 className="text-base sm:text-lg font-black text-slate-900">Riwayat Bantuan</h2>
@@ -550,10 +514,7 @@ export default function HealthSupport({ onNavigate, onLogout }) {
 
         </div>
 
-
-        {/* ==========================================
-            BABYSTEPS AI ASSISTANT CARD
-        ========================================== */}
+        {/* BABYSTEPS AI ASSISTANT CARD */}
         <section className="bg-[#E9D5FF] rounded-[28px] sm:rounded-[36px] p-5 sm:p-8 border border-purple-200 shadow-xs space-y-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-white text-purple-700 flex items-center justify-center shadow-xs">
@@ -565,7 +526,6 @@ export default function HealthSupport({ onNavigate, onLogout }) {
             </div>
           </div>
 
-          {/* AI Output Card List */}
           <div className="space-y-2.5">
             <div className="bg-white/90 backdrop-blur-xs p-3.5 rounded-2xl text-xs text-slate-700 font-medium shadow-2xs border border-purple-100">
               • Pola tidur Arka dalam 3 hari terakhir sangat konsisten — rata-rata 11.5 jam/hari, sesuai rekomendasi usia 3 bulan.
@@ -574,7 +534,6 @@ export default function HealthSupport({ onNavigate, onLogout }) {
               • Intake feeding naik +50 ml dibanding minggu lalu. Ini tanda positif pertumbuhan yang baik.
             </div>
 
-            {/* Render User Chat Dynamically */}
             {aiChatLogs.map((log, idx) => (
               <div
                 key={idx}
@@ -589,7 +548,6 @@ export default function HealthSupport({ onNavigate, onLogout }) {
             ))}
           </div>
 
-          {/* AI Question Form */}
           <form onSubmit={handleSendAi} className="pt-2 flex gap-2">
             <input
               type="text"
@@ -610,17 +568,14 @@ export default function HealthSupport({ onNavigate, onLogout }) {
 
       </main>
 
-      {/* FOOTER */}
       <Footer />
     </div>
   );
 }
 
-/* =========================================================
-   REUSABLE HELPER COMPONENTS
-========================================================= */
+/* REUSABLE HELPER COMPONENTS */
 
-function WorkflowStep({ icon, label, bg, active }) {
+function WorkflowStep({ icon, label, bg }) {
   return (
     <div className="bg-white/80 rounded-2xl p-3 text-center border border-slate-100 shadow-2xs flex flex-col items-center justify-center space-y-1.5">
       <div className={`w-8 h-8 rounded-xl ${bg} flex items-center justify-center`}>
@@ -643,7 +598,7 @@ function BenefitCard({ icon, bg, title, desc }) {
   );
 }
 
-function AccordionItem({ id, title, icon, children, isOpen, onToggle }) {
+function AccordionItem({ title, icon, children, isOpen, onToggle }) {
   return (
     <div className="border border-slate-100 rounded-2xl overflow-hidden bg-slate-50/50">
       <button

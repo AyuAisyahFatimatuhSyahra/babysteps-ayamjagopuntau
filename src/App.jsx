@@ -11,6 +11,7 @@ import SmartTracking from "./pages/SmartTracking";
 import HealthSupport from "./pages/HealthSupport"; // <-- Tambahan import HealthSupport
 import AIBaby from "./pages/AIBaby";
 import Profile from "./pages/Profile";
+import Family from "./pages/Family";
 
 
 export default function App(){
@@ -117,6 +118,18 @@ export default function App(){
       {/* HEALTH SUPPORT / DOKTER */}
       {currentPage === "health" && (
         <HealthSupport
+          onNavigate={navigate}
+          onLogout={() => {
+            setCurrentPage("landing");
+            window.scrollTo(0,0);
+          }}
+        />
+      )}
+
+
+      {/* Family */}
+      {currentPage === "family" && (
+        <Family
           onNavigate={navigate}
           onLogout={() => {
             setCurrentPage("landing");
