@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+body {
+  background-color: #F0F4FA; /* Nuansa biru lembut ala landing page */
+  color: #1E293B; /* Warna teks gelap yang tegas dan rapi */
+}
+html{
+  scroll-behavior:smooth;
+  }
+/* Tambahan variabel atau helper kustom jika diperlukan */
+:root {
+  --primary-blue: #3B82F6;
+  --pastel-yellow: #FEF08A;
+  --pastel-purple: #EDE9FE;
+  --pastel-blue: #E0F2FE;
+}
