@@ -516,7 +516,7 @@ Jawab dalam bahasa Indonesia dengan jelas dan ringkas.`;
               />
               <div>
                 <h1 className="text-lg sm:text-xl font-black text-slate-900">
-                  Baby Steps AI
+                  {/* Baby Steps AI */}
                 </h1>
                 <p className="text-[10px] sm:text-xs text-slate-400 flex items-center gap-2">
                   <span className="relative flex h-2 w-2">
