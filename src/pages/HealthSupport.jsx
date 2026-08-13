@@ -100,7 +100,7 @@ export default function HealthSupport({ onNavigate, onLogout }) {
         {!isCarePlus ? (
           // HERO STANDARD (FREE) — cute.png mentok ke kanan
           <section className="bg-gradient-to-br from-[#FAF5FF] via-[#F4F0FF] to-[#EDF4FF] rounded-[28px] sm:rounded-[36px] p-6 sm:p-10 border border-purple-100 shadow-xs relative overflow-visible">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-25.5 items-center relative z-15">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-26 items-center relative z-15">
               <div className="md:col-span-7 space-y-3 sm:space-y-4">
                 <div className="inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-md text-purple-700 px-3 py-1 rounded-full text-[11px] font-bold border border-purple-100">
                   <StarIcon className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
@@ -114,21 +114,42 @@ export default function HealthSupport({ onNavigate, onLogout }) {
                 </p>
               </div>
               <div className="md:col-span-5 flex justify-center md:justify-end items-center relative">
-                {/* PERUBAHAN: tambahkan -mr-6 sm:-mr-10 untuk menembus padding section */}
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 -mr-10 sm:-mr-16 lg:-mr-[4.5rem] w-92 sm:w-100 lg:w-116 transition-all duration-300 transform hover:scale-105">
-                <img
-                  src="/src/assets/cute.png"
-                  alt="Dokter dan Bayi"
-                  className="w-full h-auto object-contain rounded-2xl mix-blend-multiply drop-shadow-md"
-                />
-              </div>
+                {/* Bubble Chat - Free */}
+                <div
+                  className="absolute hidden md:block z-20"
+                  style={{
+                    bottom: 'calc(100% + 69px)',
+                    left: '-50px',
+                  }}
+                >
+                  <div className="bg-white rounded-2xl shadow-xl p-3.5 max-w-[200px] relative border border-blue-100">
+                    <div className="flex items-start gap-2">
+                      <Stethoscope className="w-4 h-4 text-[#609EF5] mt-0.5 shrink-0" />
+
+                      <p className="text-xs font-semibold text-slate-800 leading-relaxed">
+                        Ada yang bisa saya bantu, Mama? 
+                      </p>
+                    </div>
+
+                    {/* Panah mengarah ke gambar */}
+                    <div className="absolute -bottom-2 right-4 w-3 h-3 bg-white border-r border-b border-blue-100 rotate-45"></div>
+                  </div>
+                </div>
+
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 -mr-10 sm:-mr-16 lg:-mr-[4.5rem] w-110 sm:w-130 lg:w-135 transition-all duration-300 transform hover:scale-105">
+                  <img
+                    src="/src/assets/cute.png"
+                    alt="Dokter dan Bayi"
+                    className="w-full h-auto object-contain rounded-2xl mix-blend-multiply drop-shadow-md"
+                  />
+                </div>
               </div>
             </div>
           </section>
         ) : (
           // HERO CARE+ ACTIVE (PREMIUM)
           <section className="bg-[#FEF9C3] rounded-[28px] sm:rounded-[36px] px-6 sm:px-10 pt-6 sm:pt-10 pb-0 border border-yellow-200 shadow-xs relative overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-25.5 items-center relative z-10">
               <div className="md:col-span-7 pb-6 sm:pb-10 space-y-3 sm:space-y-4">
                 <div className="inline-flex items-center gap-1.5 bg-yellow-300 text-slate-900 px-3.5 py-1 rounded-full text-[11px] font-black">
                   ★ BabySteps Care+ Aktif • Bantuan Medis Prioritas
@@ -148,12 +169,65 @@ export default function HealthSupport({ onNavigate, onLogout }) {
                   </button>
                 </div>
               </div>
-              <div className="absolute right-1 top-[35%] -translate-y-[30%] w-97 sm:w-105 lg:w-121 transition-all duration-300 hover:scale-105">
-                <img
-                  src="/src/assets/cooldoctor.png"
-                  alt="Care+ Doctor"
-                  className="w-112 sm:w-130 lg:w-136 h-auto object-contain mix-blend-multiply drop-shadow-md"
-                />
+              <div className="md:col-span-5 flex justify-center md:justify-end items-center relative">
+                {/* Bubble Chat - Care+ */}
+                <div
+                  className="absolute hidden md:block z-20"
+                  style={{
+                    left: '-155px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                  }}
+                >
+                  <div className="relative bg-white rounded-2xl shadow-[0_8px_30px_rgba(96,158,245,0.18)] border border-blue-100 px-4 py-3.5 w-[190px]">
+                    
+                    {/* Header bubble */}
+                    <div className="flex items-center gap-2.5 mb-2">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center shrink-0">
+                        <Stethoscope className="w-4 h-4 text-[#609EF5]" />
+                      </div>
+
+                      <div>
+                        <p className="text-[10px] font-medium text-[#609EF5] uppercase tracking-wide">
+                          Dokter AI
+                        </p>
+                        <p className="text-[11px] text-green-500 font-medium flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
+                          Siap membantu
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Message */}
+                    <p className="text-xs font-semibold text-slate-700 leading-relaxed">
+                      Halo, Mama!
+                      <br />
+                      <span className="font-medium text-slate-600">
+                        Dokter siap membantu menjawab pertanyaan Mama.
+                      </span>
+                    </p>
+
+                    {/* Decorative dots */}
+                    <div className="flex gap-1 mt-3">
+                      <span className="w-1 h-1 rounded-full bg-blue-200"></span>
+                      <span className="w-1 h-1 rounded-full bg-blue-300"></span>
+                      <span className="w-1 h-1 rounded-full bg-blue-400"></span>
+                    </div>
+
+                    {/* Arrow */}
+                    <div
+                      className="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-r border-t border-blue-100 rotate-45"
+                    ></div>
+                  </div>
+                </div>
+
+                <div className="absolute right-12 top-1/2 -translate-y-1/2 -mr-10 sm:-mr-16 lg:-mr-[4.5rem] w-100 sm:w-120 lg:w-125 transition-all duration-300 transform hover:scale-105">
+                  <img
+                    src="/src/assets/cooldoctor.png"
+                    alt="Care+ Doctor"
+                    className="w-full h-auto object-contain mix-blend-multiply drop-shadow-md"
+                  />
+                </div>
               </div>
             </div>
           </section>
