@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../assets/babysteps.png";
+import babyIcon from "../assets/babyce.png"; // import gambar baby
 
 import Navbar from "../components/Navbar";
 
@@ -14,11 +15,19 @@ import {
   ChevronRight,
   Mail,
   Zap,
-  Droplets,
+  Droplets, 
   Moon,
   Sparkles,
   TrendingUp,
-  CheckCircle2
+  CheckCircle2,
+  Snowflake,
+  Baby,
+  Activity,      // untuk card 1
+  Package,       // untuk card 2
+  Mic,           // untuk card 3
+  HeartPulse,    // untuk card 4
+  Users,         // untuk card 5
+  Hospital       // untuk card 6
 } from "lucide-react";
 
 export default function LandingPage({onNavigate, onLogin}) {
@@ -26,9 +35,9 @@ export default function LandingPage({onNavigate, onLogin}) {
     <div className="min-h-screen bg-[#FDFBF7] font-sans text-slate-800 selection:bg-[#FFF78A]">
       
       <Navbar 
-  onNavigate={onNavigate}
-  onLogin={onLogin}
-/>
+        onNavigate={onNavigate}
+        onLogin={onLogin}
+      />
 
       {/* 2. HERO SECTION */}
       <section id="home" className="max-w-7xl mx-auto px-6 pt-12 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -84,7 +93,7 @@ export default function LandingPage({onNavigate, onLogin}) {
           </div>
         </div>
 
-        {/* Right Column - UI Element Mockup (Ganti Emoji dengan UI Element) */}
+        {/* Right Column - UI Element Mockup */}
         <div className="relative flex justify-center">
           {/* Soft Glow Ambient Shape */}
           <div className="absolute inset-0 bg-gradient-to-tr from-[#BADAFF]/40 to-[#FFF78A]/40 rounded-full filter blur-3xl opacity-70"></div>
@@ -100,8 +109,8 @@ export default function LandingPage({onNavigate, onLogin}) {
             {/* Header Widget: Baby Profile Card */}
             <div className="flex items-center justify-between bg-[#F0F4FA] p-3.5 rounded-2xl border border-blue-100/60">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#609EF5] text-white flex items-center justify-center font-bold text-lg shadow-sm">
-                  👶
+                <div className="w-10 h-10 rounded-xl bg-[#609EF5] text-white flex items-center justify-center shadow-sm">
+                  <img src={babyIcon} alt="Baby" className="w-30 h-30 object-contain" />
                 </div>
                 <div>
                   <div className="font-bold text-sm text-slate-900 flex items-center gap-1.5">
@@ -178,15 +187,17 @@ export default function LandingPage({onNavigate, onLogin}) {
               </div>
             </div>
             <div className="bg-[#FFFCE8] p-8 rounded-3xl text-center border border-amber-100">
-              <div className="text-6xl mb-2">🍼</div>
+              {/* Ganti emoji 🍼 dengan ikon Droplets */}
+              <Droplets className="w-20 h-20 text-blue-500 mx-auto mb-2" />
               <span className="inline-block bg-[#609EF5] text-white font-bold text-xs px-4 py-1.5 rounded-full">550 ml / hari</span>
             </div>
           </div>
 
-          {/* Item 02 */}
+            {/* Item 02 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="bg-[#F0F4FA] p-8 rounded-3xl text-center border border-blue-100 order-2 md:order-1">
-              <div className="text-6xl mb-2">🧊</div>
+              {/* Ganti emoji 🧊 dengan ikon Snowflake */}
+              <Snowflake className="w-20 h-20 text-cyan-500 mx-auto mb-2" />
               <span className="inline-block bg-[#D6C7FF] text-slate-900 font-bold text-xs px-4 py-1.5 rounded-full">Sistem FIFO ASI</span>
             </div>
             <div className="space-y-4 order-1 md:order-2">
@@ -210,8 +221,9 @@ export default function LandingPage({onNavigate, onLogin}) {
               </div>
             </div>
             <div className="bg-[#FFF9F2] p-8 rounded-3xl text-center border border-orange-100">
-              <div className="text-6xl mb-2">👶</div>
-              <span className="inline-block bg-[#BADAFF] text-slate-900 font-bold text-xs px-4 py-1.5 rounded-full">AI Pola Bayi</span>
+              {/* Ikon Baby dari Lucide, bukan gambar */}
+              <Baby className="w-20 h-20 text-orange-400 mx-auto mb-2" />
+              <span className="inline-block bg-[#BADAFF] text-slate-600 font-bold text-xs px-4 py-1.5 rounded-full">AI Pola Bayi</span>
             </div>
           </div>
         </div>
@@ -263,6 +275,9 @@ export default function LandingPage({onNavigate, onLogin}) {
             {/* Card 1 */}
             <div className="bg-[#FFF78A]/40 border-2 border-[#FFF78A] p-6 rounded-3xl space-y-4 flex flex-col justify-between">
               <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-white text-amber-600 flex items-center justify-center shadow-sm">
+                  <Activity className="w-5 h-5" />
+                </div>
                 <span className="bg-white text-slate-900 font-bold text-[10px] uppercase px-3 py-1 rounded-full shadow-sm">UTAMA</span>
                 <h3 className="font-extrabold text-xl text-slate-900">Hitung Kalori & Pantau Berat Badan</h3>
                 <p className="text-slate-600 text-xs leading-relaxed">
@@ -277,6 +292,9 @@ export default function LandingPage({onNavigate, onLogin}) {
             {/* Card 2 */}
             <div className="bg-[#D6C7FF]/40 border-2 border-[#D6C7FF] p-6 rounded-3xl space-y-4 flex flex-col justify-between">
               <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-white text-purple-600 flex items-center justify-center shadow-sm">
+                  <Package className="w-5 h-5" />
+                </div>
                 <span className="bg-white text-slate-900 font-bold text-[10px] uppercase px-3 py-1 rounded-full shadow-sm">STOK ASI</span>
                 <h3 className="font-extrabold text-xl text-slate-900">Manajemen Stok ASI Freezer (FIFO)</h3>
                 <p className="text-slate-600 text-xs leading-relaxed">
@@ -291,6 +309,9 @@ export default function LandingPage({onNavigate, onLogin}) {
             {/* Card 3 */}
             <div className="bg-[#BADAFF]/40 border-2 border-[#BADAFF] p-6 rounded-3xl space-y-4 flex flex-col justify-between">
               <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-white text-blue-600 flex items-center justify-center shadow-sm">
+                  <Mic className="w-5 h-5" />
+                </div>
                 <span className="bg-white text-slate-900 font-bold text-[10px] uppercase px-3 py-1 rounded-full shadow-sm">FITUR AI</span>
                 <h3 className="font-extrabold text-xl text-slate-900">Penerjemah Tangisan & Kesehatan Pup</h3>
                 <p className="text-slate-600 text-xs leading-relaxed">
@@ -305,6 +326,9 @@ export default function LandingPage({onNavigate, onLogin}) {
             {/* Card 4 */}
             <div className="bg-[#FDE63F]/40 border-2 border-[#FDE63F] p-6 rounded-3xl space-y-4 flex flex-col justify-between">
               <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-white text-red-600 flex items-center justify-center shadow-sm">
+                  <HeartPulse className="w-5 h-5" />
+                </div>
                 <span className="bg-white text-slate-900 font-bold text-[10px] uppercase px-3 py-1 rounded-full shadow-sm">DARURAT</span>
                 <h3 className="font-extrabold text-xl text-slate-900">Pertolongan Pertama & Resume Medis</h3>
                 <p className="text-slate-600 text-xs leading-relaxed">
@@ -319,6 +343,9 @@ export default function LandingPage({onNavigate, onLogin}) {
             {/* Card 5 */}
             <div className="bg-[#609EF5]/30 border-2 border-[#609EF5] p-6 rounded-3xl space-y-4 flex flex-col justify-between">
               <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-white text-indigo-600 flex items-center justify-center shadow-sm">
+                  <Users className="w-5 h-5" />
+                </div>
                 <span className="bg-white text-slate-900 font-bold text-[10px] uppercase px-3 py-1 rounded-full shadow-sm">TIM PARENTING</span>
                 <h3 className="font-extrabold text-xl text-slate-900">Keluarga Kompak & Apresiasi Ibu</h3>
                 <p className="text-slate-600 text-xs leading-relaxed">
@@ -333,6 +360,9 @@ export default function LandingPage({onNavigate, onLogin}) {
             {/* Card 6 */}
             <div className="bg-white border-2 border-slate-200 p-6 rounded-3xl space-y-4 flex flex-col justify-between shadow-sm">
               <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shadow-sm">
+                  <Hospital className="w-5 h-5" />
+                </div>
                 <span className="bg-slate-100 text-slate-900 font-bold text-[10px] uppercase px-3 py-1 rounded-full">MEDIS & DONOR</span>
                 <h3 className="font-extrabold text-xl text-slate-900">Cari Klinik Laktasi & Donor ASI Aman</h3>
                 <p className="text-slate-600 text-xs leading-relaxed">

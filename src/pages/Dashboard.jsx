@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import DashboardNavbar from '../components/DashboardNavbar';
-import { 
-  Sparkles, TrendingUp, Stethoscope, Users, Bot, 
-  ChevronRight, ArrowRight, Heart, ShieldCheck, 
-  Lightbulb, Moon, Milk, PlayCircle
+import {
+  Sparkles, TrendingUp, Stethoscope, Users, Bot,
+  ChevronRight, ArrowRight, Heart, ShieldCheck,
+  Lightbulb, Moon, Milk, PlayCircle, Footprints, Armchair, Bed
 } from 'lucide-react';
 
 export default function Dashboard({ onLogout, onNavigateToFeature }) {
@@ -16,21 +16,22 @@ export default function Dashboard({ onLogout, onNavigateToFeature }) {
 
   return (
     <div className="min-h-screen bg-[#F0F4FA] font-sans text-slate-800 pb-16">
-     <DashboardNavbar
-
-onNavigate={onNavigateToFeature}
-
-onLogout={onLogout}
-
-/>
+      <DashboardNavbar
+        onNavigate={onNavigateToFeature}
+        onLogout={onLogout}
+      />
 
       <main className="max-w-[1100px] mx-auto px-4 lg:px-8 pt-6 space-y-8">
         
         {/* ================= 1. HEADER RINGKAS ================= */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-[#FFF78A] flex items-center justify-center text-2xl shadow-xs">
-              👶
+            <div className="w-14 h-14 rounded-2xl bg-[#FFF78A] flex items-center justify-center shadow-xs">
+              <img 
+                src="src/assets/babyco.png" 
+                alt="Baby" 
+                className="w-29 h-29 object-contain" 
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -197,16 +198,20 @@ onLogout={onLogout}
                 {/* Step Visual List */}
                 <div className="space-y-2">
                   <div className="bg-white px-4 py-3 rounded-2xl border border-slate-100 flex items-center gap-3 font-bold text-xs text-slate-700 shadow-xs">
-                    <span className="text-lg">🤱</span> Peluk erat si kecil di dada
+                    <Heart className="w-5 h-5 text-rose-500" />
+                    Peluk erat si kecil di dada
                   </div>
                   <div className="bg-white px-4 py-3 rounded-2xl border border-slate-100 flex items-center gap-3 font-bold text-xs text-slate-700 shadow-xs">
-                    <span className="text-lg">🚶‍♂️</span> Jalan santai selama 5 menit
+                    <Footprints className="w-5 h-5 text-indigo-500" />
+                    Jalan santai selama 5 menit
                   </div>
                   <div className="bg-white px-4 py-3 rounded-2xl border border-slate-100 flex items-center gap-3 font-bold text-xs text-slate-700 shadow-xs">
-                    <span className="text-lg">🪑</span> Duduk tenang selama 8 menit
+                    <Armchair className="w-5 h-5 text-amber-500" />
+                    Duduk tenang selama 8 menit
                   </div>
                   <div className="bg-white px-4 py-3 rounded-2xl border border-slate-100 flex items-center gap-3 font-bold text-xs text-slate-700 shadow-xs">
-                    <span className="text-lg">🛏️</span> Pindahkan perlahan ke kasur
+                    <Bed className="w-5 h-5 text-sky-500" />
+                    Pindahkan perlahan ke kasur
                   </div>
                 </div>
 

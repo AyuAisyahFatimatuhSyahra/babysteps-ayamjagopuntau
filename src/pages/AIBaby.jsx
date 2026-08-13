@@ -22,9 +22,9 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-// ============================================================
+
 // KONFIGURASI GEMINI
-// ============================================================
+
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 // Daftar model: prioritas native audio, lalu fallback
@@ -36,16 +36,16 @@ const MODEL_CANDIDATES = [
   "gemini-pro-latest",
 ];
 
-// ============================================================
+
 // KOMPONEN UTAMA
-// ============================================================
+
 export default function AIBaby({ onNavigate, onLogout }) {
   // ===== STATE =====
   const [messages, setMessages] = useState([
     {
       id: 1,
       role: "ai",
-      text: "Halo Bunda! 👋 Saya AI Baby Assistant.\n\nSaya bisa:\n✅ Menjawab pertanyaan seputar bayi\n✅ Menganalisis gambar pup (konsistensi, warna, dll)\n✅ Menganalisis suara tangisan (langsung dari audio atau deskripsi)\n\nSilakan tanyakan, upload gambar, atau rekam suara!",
+      text: "Halo, Bunda. Saya AI Baby Assistant yang siap membantu Bunda dalam memahami kondisi dan kebutuhan si kecil. Saya dapat membantu menjawab berbagai pertanyaan seputar bayi, menganalisis gambar feses berdasarkan warna dan konsistensinya, serta menganalisis suara tangisan bayi melalui rekaman audio atau deskripsi yang Bunda berikan.",
       time: new Date().toLocaleString("id-ID", {
         hour: "2-digit",
         minute: "2-digit",
@@ -455,9 +455,9 @@ Jawab dalam bahasa Indonesia dengan jelas dan ringkas.`;
     }
   };
 
-  // ============================================================
+  
   // FUNGSI LAIN
-  // ============================================================
+  
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
     setCopiedText(text);
@@ -484,9 +484,9 @@ Jawab dalam bahasa Indonesia dengan jelas dan ringkas.`;
     setApiError(null);
   };
 
-  // ============================================================
+  
   // RENDER (tidak berubah)
-  // ============================================================
+  
   return (
     <div className="min-h-screen bg-[#F7F9FC] font-sans text-slate-800 pb-16">
       <DashboardNavbar onNavigate={onNavigate} onLogout={onLogout} />

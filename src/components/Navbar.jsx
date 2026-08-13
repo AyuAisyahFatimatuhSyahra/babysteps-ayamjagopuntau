@@ -8,9 +8,18 @@ export default function Navbar({ onNavigate, onLogin }) {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
-  // Fungsi navigasi + tutup menu otomatis
+  // Navigasi biasa + tutup menu
   const handleNavigate = (page) => {
     onNavigate(page);
+    closeMenu();
+  };
+
+  // Navigasi ke landing + set hash untuk scroll otomatis
+  const handleNavigateWithHash = (targetHash) => {
+    onNavigate("landing");
+    // Setelah navigasi ke landing, kita set hash agar komponen landing
+    // bisa mendeteksi dan scroll ke elemen target
+    window.location.hash = targetHash;
     closeMenu();
   };
 
@@ -62,26 +71,28 @@ export default function Navbar({ onNavigate, onLogin }) {
             Beranda
           </button>
 
-          <a
-            href="#challenges"
+          {/* === PERUBAHAN DI SINI === */}
+          <button
+            onClick={() => handleNavigateWithHash("#challenges")}
             className="hover:text-[#609EF5] transition"
           >
             Tantangan Kami
-          </a>
+          </button>
 
-          <a
-            href="#features"
+          <button
+            onClick={() => handleNavigateWithHash("#features")}
             className="hover:text-[#609EF5] transition"
           >
             Fitur
-          </a>
+          </button>
 
-          <a
-            href="#pricing"
+          <button
+            onClick={() => handleNavigateWithHash("#pricing")}
             className="hover:text-[#609EF5] transition"
           >
             Harga
-          </a>
+          </button>
+          {/* ========================= */}
 
           <button
             onClick={() => handleNavigate("articles")}
@@ -127,7 +138,7 @@ export default function Navbar({ onNavigate, onLogin }) {
             Coba Gratis
           </button>
 
-          {/* Tombol Hamburger (muncul di layar < md) */}
+          {/* Tombol Hamburger */}
           <button
             onClick={toggleMenu}
             className="md:hidden text-slate-600 hover:text-[#609EF5] transition"
@@ -137,7 +148,7 @@ export default function Navbar({ onNavigate, onLogin }) {
         </div>
       </div>
 
-      {/* MENU MOBILE (dropdown) */}
+      {/* MENU MOBILE */}
       {isMenuOpen && (
         <div className="
           md:hidden
@@ -160,29 +171,28 @@ export default function Navbar({ onNavigate, onLogin }) {
             Beranda
           </button>
 
-          <a
-            href="#challenges"
-            onClick={closeMenu}
-            className="hover:text-[#609EF5] transition"
+          {/* === PERUBAHAN DI SINI === */}
+          <button
+            onClick={() => handleNavigateWithHash("#challenges")}
+            className="text-left hover:text-[#609EF5] transition"
           >
             Tantangan Kami
-          </a>
+          </button>
 
-          <a
-            href="#features"
-            onClick={closeMenu}
-            className="hover:text-[#609EF5] transition"
+          <button
+            onClick={() => handleNavigateWithHash("#features")}
+            className="text-left hover:text-[#609EF5] transition"
           >
             Fitur
-          </a>
+          </button>
 
-          <a
-            href="#pricing"
-            onClick={closeMenu}
-            className="hover:text-[#609EF5] transition"
+          <button
+            onClick={() => handleNavigateWithHash("#pricing")}
+            className="text-left hover:text-[#609EF5] transition"
           >
             Harga
-          </a>
+          </button>
+          {/* ========================= */}
 
           <button
             onClick={() => handleNavigate("articles")}
@@ -205,7 +215,6 @@ export default function Navbar({ onNavigate, onLogin }) {
             Panduan Usia
           </button>
 
-          {/* Tombol CTA di mobile */}
           <button
             onClick={onLogin}
             className="

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import logo from '../assets/babysteps.png';
+import babyco from '../assets/babyco.png'; // import gambar baby
 import { 
   ArrowLeft, Mail, Lock, User, Eye, EyeOff, 
-  Sparkles, Heart, CheckCircle2, ShieldCheck 
+  Sparkles, Heart, CheckCircle2, ShieldCheck,
+  Hand, Rocket, ArrowRight 
 } from 'lucide-react';
 
 export default function AuthPage({ initialMode = 'login', onLoginSuccess, onBackToHome }) {
@@ -30,10 +32,10 @@ export default function AuthPage({ initialMode = 'login', onLoginSuccess, onBack
       {/* Outer Card Container */}
       <div className="max-w-4xl w-full bg-white rounded-[32px] sm:rounded-[40px] border-2 border-blue-100 shadow-2xl shadow-blue-100/50 overflow-hidden grid grid-cols-1 md:grid-cols-2 relative">
         
-        {/* Tombol Kembali ke Beranda */}
+        {/* Tombol Kembali ke Beranda - lebih atas & kiri */}
         <button 
           onClick={onBackToHome}
-          className="absolute top-6 left-6 z-10 flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#609EF5] transition-colors cursor-pointer bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-100 shadow-sm"
+          className="absolute top-4 left-4 z-10 flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#609EF5] transition-colors cursor-pointer bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-slate-100 shadow-sm"
         >
           <ArrowLeft className="w-3.5 h-3.5" /> Beranda
         </button>
@@ -50,7 +52,9 @@ export default function AuthPage({ initialMode = 'login', onLoginSuccess, onBack
             {/* Header Text */}
             <div>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
-                {isSignUp ? 'Buat Akun Baru ✨' : 'Selamat Datang! 👋'}
+                {isSignUp 
+                  ? <>Buat Akun Baru <Sparkles className="inline w-5 h-5 text-amber-400" /></>
+                  : <>Selamat Datang! <Hand className="inline w-5 h-5 text-blue-500" /></>}
               </h2>
               <p className="text-slate-500 text-xs sm:text-sm mt-1">
                 {isSignUp 
@@ -138,9 +142,13 @@ export default function AuthPage({ initialMode = 'login', onLoginSuccess, onBack
               {/* Main Submit Button */}
               <button 
                 type="submit"
-                className="w-full bg-[#609EF5] hover:bg-blue-600 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md shadow-blue-200 transition-all cursor-pointer transform active:scale-95 mt-2"
+                className="w-full bg-[#609EF5] hover:bg-blue-600 text-white font-extrabold py-3.5 rounded-2xl text-xs shadow-md shadow-blue-200 transition-all cursor-pointer transform active:scale-95 mt-2 flex items-center justify-center gap-2"
               >
-                {isSignUp ? 'Daftar Akun Gratis 🚀' : 'Masuk Ke Dashboard ➔'}
+                {isSignUp ? (
+                  <>Daftar Akun Gratis <Rocket className="w-4 h-4" /></>
+                ) : (
+                  <>Masuk Ke Dashboard <ArrowRight className="w-4 h-4" /></>
+                )}
               </button>
             </form>
 
@@ -197,8 +205,8 @@ export default function AuthPage({ initialMode = 'login', onLoginSuccess, onBack
           <div className="relative z-10 space-y-4 my-8">
             <div className="bg-white/80 backdrop-blur-md p-6 rounded-3xl border border-white/60 shadow-xl space-y-3">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-[#FFF78A] flex items-center justify-center text-2xl shadow-sm">
-                  👶
+                <div className="w-20 h-20 rounded-2xl bg-[#FFF78A] flex items-center justify-center shadow-sm overflow-hidden">
+                  <img src={babyco} alt="Baby" className="w-40 h-40 object-contain" />
                 </div>
                 <div>
                   <h4 className="font-extrabold text-slate-900 text-sm">Pantau Tanpa Cemas</h4>
@@ -214,7 +222,7 @@ export default function AuthPage({ initialMode = 'login', onLoginSuccess, onBack
             </div>
 
             <div className="bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-white/40 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-rose-400 text-white flex items-center justify-center text-xs font-black">
+              <div className="w-8 h-8 rounded-full bg-rose-400 text-white flex items-center justify-center">
                 <Heart className="w-4 h-4 fill-white" />
               </div>
               <p className="text-xs font-bold text-slate-800">

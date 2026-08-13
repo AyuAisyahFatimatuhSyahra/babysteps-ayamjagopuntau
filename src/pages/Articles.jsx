@@ -2,204 +2,124 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SectionTitle from "../components/SectionTitle";
-import {Search, ArrowRight} from "lucide-react";
+import {
+  Search,
+  ArrowRight,
+  Droplet,
+  Moon,
+  TrendingUp,
+  Heart,
+  Milk,
+  Sparkles
+} from "lucide-react";
 
-export default function Articles({onNavigate, onLogin}){
+export default function Articles({ onNavigate, onLogin }) {
+  const articles = [
+    {
+      title: "Berapa Banyak ASI yang Dibutuhkan Bayi Saya?",
+      category: "Nutrisi",
+      desc: "Pahami kebutuhan asupan susu harian berdasarkan tahap pertumbuhan bayi."
+    },
+    {
+      title: "Pola Tidur Bayi Berdasarkan Usia",
+      category: "Tidur",
+      desc: "Pelajari rutinitas tidur sehat dan perubahan umum seiring perkembangan."
+    },
+    {
+      title: "Tanda Bayi Tumbuh dengan Baik",
+      category: "Pertumbuhan",
+      desc: "Temukan tonggak penting dan sinyal perkembangan bayi yang sehat."
+    },
+    {
+      title: "Memahami Pola Tangisan Bayi",
+      category: "Pola Asuh",
+      desc: "Pelajari cara mengenali berbagai sinyal bayi dan merespons dengan percaya diri."
+    },
+    {
+      title: "Panduan Penyimpanan ASI",
+      category: "Menyusui",
+      desc: "Panduan sederhana untuk menyimpan dan mengelola ASI dengan aman."
+    },
+    {
+      title: "Cek Perkembangan Bayi",
+      category: "Perkembangan",
+      desc: "Lacak keterampilan penting yang berkembang setiap bulan pada bayi Anda."
+    }
+  ];
 
-const articles=[
-{
-title:"How Much Milk Does My Baby Need?",
-category:"Nutrition",
-desc:"Understand daily milk intake and nutrition needs based on your baby's growth stage."
-},
-{
-title:"Baby Sleep Patterns By Age",
-category:"Sleep",
-desc:"Learn about healthy sleep routines and common changes during development."
-},
-{
-title:"Signs Your Baby Is Growing Well",
-category:"Growth",
-desc:"Discover important milestones and signals of healthy baby development."
-},
-{
-title:"Understanding Baby Crying Patterns",
-category:"Parenting",
-desc:"Learn how to recognize different baby signals and respond confidently."
-},
-{
-title:"Breast Milk Storage Guide",
-category:"Breastfeeding",
-desc:"A simple guide to storing and managing breast milk safely."
-},
-{
-title:"Baby Development Checklist",
-category:"Development",
-desc:"Track important skills your baby develops month by month."
-}
-];
+  // Pemetaan kategori ke ikon dan warna
+  const categoryMap = {
+    Nutrisi: { icon: Droplet, bg: "bg-blue-100", color: "text-blue-600" },
+    Tidur: { icon: Moon, bg: "bg-purple-100", color: "text-purple-600" },
+    Pertumbuhan: { icon: TrendingUp, bg: "bg-green-100", color: "text-green-600" },
+    "Pola Asuh": { icon: Heart, bg: "bg-rose-100", color: "text-rose-600" },
+    Menyusui: { icon: Milk, bg: "bg-amber-100", color: "text-amber-600" },
+    Perkembangan: { icon: Sparkles, bg: "bg-indigo-100", color: "text-indigo-600" }
+  };
 
+  return (
+    <div className="min-h-screen bg-[#FDFBF7] text-slate-800">
+      <Navbar onNavigate={onNavigate} onLogin={onLogin} />
 
-return(
-<div className="min-h-screen bg-[#FDFBF7] text-slate-800">
+      {/* Hero Section */}
+      <section className="py-20 text-center">
+        <div className="max-w-5xl mx-auto px-6">
+          <h1 className="text-5xl font-black text-slate-900">Artikel BabySteps</h1>
+          <p className="mt-4 text-slate-600 text-lg">
+            Panduan parenting ahli untuk membantu Anda memahami kebutuhan bayi.
+          </p>
 
-<Navbar
-onNavigate={onNavigate}
-onLogin={onLogin}
-/>
+          <div className="mt-10 max-w-2xl mx-auto flex items-center bg-white border rounded-full px-5 py-3">
+            <Search className="text-slate-400" />
+            <input
+              placeholder="Cari artikel parenting..."
+              className="ml-3 w-full outline-none text-sm"
+            />
+          </div>
+        </div>
+      </section>
 
-<section className="py-20 text-center">
+      {/* Articles Grid */}
+      <section className="py-10">
+        <div className="max-w-6xl mx-auto px-6">
+          <SectionTitle
+            title="Panduan Parenting Terbaru"
+            desc="Informasi bermanfaat untuk setiap tahap perjalanan bayi Anda."
+          />
 
-<div className="max-w-5xl mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-6 mt-10">
+            {articles.map((item, i) => {
+              const { icon: Icon, bg, color } = categoryMap[item.category] || {};
+              return (
+                <div
+                  key={i}
+                  className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm hover:shadow-md transition flex flex-col"
+                >
+                  {/* Baris ikon + kategori */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className={`p-2 rounded-full ${bg} ${color}`}>
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <span className="bg-[#BADAFF] px-3 py-1 rounded-full text-xs font-bold">
+                      {item.category}
+                    </span>
+                  </div>
 
-<h1 className="text-5xl font-black text-slate-900">
-BabySteps Articles
-</h1>
+                  <h3 className="font-black text-xl mt-1">{item.title}</h3>
+                  <p className="text-sm text-slate-600 mt-3 flex-1">{item.desc}</p>
 
-<p className="mt-4 text-slate-600 text-lg">
-Expert parenting guides to help you understand your baby's needs.
-</p>
+                  <button className="mt-5 flex items-center gap-2 text-[#609EF5] font-bold text-sm">
+                    Baca Selengkapnya
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
-
-<div className="
-mt-10
-max-w-2xl
-mx-auto
-flex
-items-center
-bg-white
-border
-rounded-full
-px-5
-py-3
-">
-
-<Search className="text-slate-400"/>
-
-<input
-placeholder="Search parenting articles..."
-className="
-ml-3
-w-full
-outline-none
-text-sm
-"
-/>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<section className="py-10">
-
-<div className="max-w-6xl mx-auto px-6">
-
-<SectionTitle
-title="Latest Parenting Guides"
-desc="Helpful information for every stage of your baby's journey."
-/>
-
-
-<div className="
-grid
-md:grid-cols-3
-gap-6
-mt-10
-">
-
-
-{
-articles.map((item,i)=>(
-
-<div
-key={i}
-className="
-bg-white
-rounded-3xl
-border
-border-slate-100
-p-6
-shadow-sm
-hover:shadow-md
-transition
-"
->
-
-
-<span className="
-bg-[#BADAFF]
-px-3
-py-1
-rounded-full
-text-xs
-font-bold
-">
-
-{item.category}
-
-</span>
-
-
-<h3 className="
-font-black
-text-xl
-mt-5
-">
-
-{item.title}
-
-</h3>
-
-
-<p className="
-text-sm
-text-slate-600
-mt-3
-">
-
-{item.desc}
-
-</p>
-
-
-<button className="
-mt-5
-flex
-items-center
-gap-2
-text-[#609EF5]
-font-bold
-text-sm
-">
-
-Read More
-
-<ArrowRight size={16}/>
-
-</button>
-
-
-</div>
-
-))
-
-}
-
-
-</div>
-
-</div>
-
-</section>
-
-
-<Footer/>
-
-</div>
-)
-
+      <Footer />
+    </div>
+  );
 }
