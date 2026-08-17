@@ -5,8 +5,9 @@ import {
   ChevronRight, ArrowRight, Heart, ShieldCheck,
   Lightbulb, Moon, Milk, PlayCircle, Footprints, Armchair, Bed
 } from 'lucide-react';
-// 👇 Import gambar dari folder assets (relatif terhadap file ini)
-import babyImage from '../assets/babyce.png';
+
+// 🔽 IMPORT GAMBAR SEPERTI DI AUTH PAGE
+import babyImage from '../assets/babyce.png';   // sama seperti import babyco di AuthPage
 
 export default function Dashboard({ onLogout, onNavigateToFeature }) {
   const [activeTab, setActiveTab] = useState('tips');
@@ -29,7 +30,7 @@ export default function Dashboard({ onLogout, onNavigateToFeature }) {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-[#FFF78A] flex items-center justify-center shadow-xs">
-              {/* 👇 Gunakan variabel hasil import */}
+              {/* 🔽 MENGGUNAKAN VARIABEL HASIL IMPORT */}
               <img 
                 src={babyImage} 
                 alt="Baby" 
