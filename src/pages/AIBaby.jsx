@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import DashboardNavbar from "../components/DashboardNavbar";
 import logo from "../assets/babysteps.png";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import ReactMarkdown from 'react-markdown';
 
 // Ikon
 import {
@@ -22,9 +23,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-
 // KONFIGURASI GEMINI
-
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 // Daftar model: prioritas native audio, lalu fallback
@@ -36,9 +35,7 @@ const MODEL_CANDIDATES = [
   "gemini-pro-latest",
 ];
 
-
 // KOMPONEN UTAMA
-
 export default function AIBaby({ onNavigate, onLogout }) {
   // ===== STATE =====
   const [messages, setMessages] = useState([
@@ -169,16 +166,15 @@ export default function AIBaby({ onNavigate, onLogout }) {
               mimeType: uploadedFile.type,
             },
           };
-          // Prompt sederhana untuk analisis tangisan
-          const prompt =
-            userMessage ||
-            "Analisis suara tangisan ini. Berikan kemungkinan penyebab (lapar, mengantuk, tidak nyaman, sakit) dan rekomendasi sederhana. Jawab dalam bahasa Indonesia.";
+          // Prompt dengan kalimat pembuka khusus
+          const basePrompt = userMessage || "Analisis suara tangisan ini. Berikan kemungkinan penyebab (lapar, mengantuk, tidak nyaman, sakit) dan rekomendasi sederhana. Jawab dalam bahasa Indonesia.";
+          const fullPrompt = `Mulailah jawaban Anda dengan kalimat: 'Halo, Bunda! Dari deskripsi dan rekaman suara tangisan bayi yang Bunda sampaikan, saya sudah menangkap beberapa pola. Namun, untuk memastikan analisis yang lebih akurat dan tidak salah tafsir, saya perlu menguraikan atau "menerjemahkan" dulu beberapa detail yang Bunda berikan karena tangisan bayi itu seperti kode, perlu dibaca lebih dalam supaya kesimpulannya tepat dan tidak terburu-buru.' Kemudian lanjutkan dengan analisis berdasarkan informasi yang tersedia. ${basePrompt}`;
 
           // Tambahkan pesan user ke UI
           const userMsg = {
             id: messages.length + 1,
             role: "user",
-            text: prompt + " 🎤 (audio mentah)",
+            text: userMessage + " 🎤 (audio mentah)",
             time: new Date().toLocaleString("id-ID", {
               hour: "2-digit",
               minute: "2-digit",
@@ -194,7 +190,7 @@ export default function AIBaby({ onNavigate, onLogout }) {
           setIsTyping(true);
 
           try {
-            const result = await model.generateContent([prompt, audioPart]);
+            const result = await model.generateContent([fullPrompt, audioPart]);
             const response = await result.response;
             responseText = response.text();
 
@@ -279,8 +275,8 @@ export default function AIBaby({ onNavigate, onLogout }) {
 - Disclaimer bahwa ini bukan diagnosis medis
 Jawab dalam bahasa Indonesia dengan format jelas.`;
       } else if (isAudio || userMessage.toLowerCase().includes("tangisan") || userMessage.toLowerCase().includes("suara")) {
-        // Prompt sederhana untuk audio (baik dari transkripsi atau deskripsi manual)
-        systemPrompt = `Anda adalah asisten kesehatan bayi yang ahli. Berdasarkan deskripsi tangisan berikut, berikan analisis sederhana:
+        // Prompt dengan kalimat pembuka untuk analisis audio (deskripsi atau transkripsi)
+        systemPrompt = `Anda adalah asisten kesehatan bayi yang ahli. Mulailah jawaban Anda dengan kalimat: 'Halo, Bunda! Dari deskripsi dan rekaman suara tangisan bayi yang Bunda sampaikan, saya sudah menangkap beberapa pola. Namun, untuk memastikan analisis yang lebih akurat dan tidak salah tafsir, saya perlu menguraikan atau "menerjemahkan" dulu beberapa detail yang Bunda berikan karena tangisan bayi itu seperti kode, perlu dibaca lebih dalam supaya kesimpulannya tepat dan tidak terburu-buru.' Kemudian, berdasarkan deskripsi tangisan berikut, berikan analisis sederhana:
 - Kemungkinan penyebab utama (lapar, mengantuk, tidak nyaman, sakit, atau lainnya)
 - Rekomendasi singkat untuk menenangkan
 - Kapan harus ke dokter (jika ada tanda bahaya)
@@ -455,9 +451,7 @@ Jawab dalam bahasa Indonesia dengan jelas dan ringkas.`;
     }
   };
 
-  
   // FUNGSI LAIN
-  
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
     setCopiedText(text);
@@ -484,9 +478,7 @@ Jawab dalam bahasa Indonesia dengan jelas dan ringkas.`;
     setApiError(null);
   };
 
-  
   // RENDER (tidak berubah)
-  
   return (
     <div className="min-h-screen bg-[#F7F9FC] font-sans text-slate-800 pb-16">
       <DashboardNavbar onNavigate={onNavigate} onLogout={onLogout} />
@@ -567,8 +559,31 @@ Jawab dalam bahasa Indonesia dengan jelas dan ringkas.`;
                 ) : (
                   <div className="flex justify-start">
                     <div className="max-w-[85%] sm:max-w-[75%]">
-                      <div className="bg-slate-50 border border-slate-100 text-slate-800 rounded-2xl rounded-bl-none px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap">
-                        {msg.text}
+                      <div className="bg-slate-50 border border-slate-100 text-slate-800 rounded-2xl rounded-bl-none px-4 py-3 text-sm leading-relaxed">
+                        <ReactMarkdown
+                          components={{
+                            p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                            ul: ({ children }) => <ul className="list-disc pl-5 mb-2 space-y-1">{children}</ul>,
+                            ol: ({ children }) => <ol className="list-decimal pl-5 mb-2 space-y-1">{children}</ol>,
+                            li: ({ children }) => <li className="mb-1">{children}</li>,
+                            strong: ({ children }) => <strong className="font-bold text-slate-900">{children}</strong>,
+                            h1: ({ children }) => <h1 className="text-lg font-bold mb-2">{children}</h1>,
+                            h2: ({ children }) => <h2 className="text-base font-bold mb-2">{children}</h2>,
+                            h3: ({ children }) => <h3 className="text-sm font-bold mb-2">{children}</h3>,
+                            blockquote: ({ children }) => (
+                              <blockquote className="border-l-4 border-[#609EF5] pl-3 my-2 text-slate-600">
+                                {children}
+                              </blockquote>
+                            ),
+                            code: ({ children }) => (
+                              <code className="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">
+                                {children}
+                              </code>
+                            ),
+                          }}
+                        >
+                          {msg.text}
+                        </ReactMarkdown>
                       </div>
                       <div className="flex items-center gap-3 mt-1">
                         <span className="text-[10px] text-slate-400">{msg.time}</span>
@@ -715,10 +730,10 @@ Jawab dalam bahasa Indonesia dengan jelas dan ringkas.`;
         </div>
 
         {/* Peringatan Keamanan */}
-        <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-xl text-[10px] text-amber-700">
+        {/* <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-xl text-[10px] text-amber-700">
           ⚠️ <strong>Catatan Keamanan:</strong> API key disimpan di frontend. Untuk produksi,
           gunakan backend server untuk memanggil Gemini API.
-        </div>
+        </div> */}
       </main>
     </div>
   );
