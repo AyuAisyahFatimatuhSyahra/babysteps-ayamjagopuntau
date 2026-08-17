@@ -28,7 +28,7 @@ export default function Dashboard({ onLogout, onNavigateToFeature }) {
           <div className="flex items-center gap-4">
             <div className="w-14 h-14 rounded-2xl bg-[#FFF78A] flex items-center justify-center shadow-xs">
               <img 
-                src="src/assets/babyco.png" 
+                src="src/assets/babyce.png" 
                 alt="Baby" 
                 className="w-29 h-29 object-contain" 
               />
